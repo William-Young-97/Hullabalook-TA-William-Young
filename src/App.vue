@@ -55,6 +55,11 @@
         :products="allProducts"
         @stockFilterApplied="updateStockFilter"
       />
+      <BrandFilter
+        class="brandFilter"
+        :products="allProducts"
+        @brandFilterApplied="updateBrandFilter"
+      />
       <div></div>
     </div>
 
@@ -67,6 +72,7 @@
 <script>
 import ProductGridItem from './components/ProductGridItem.vue';
 import StockFilter from './components/StockFilter.vue';
+import BrandFilter from './components/BrandFilter.vue';
 import products from './data/products.json';
 
 export default {
@@ -74,15 +80,21 @@ export default {
   components: {
     ProductGridItem,
     StockFilter,
+    BrandFilter,
   },
   data() {
     return {
       allProducts: products,
       displayedProducts: products,
       stockFilterState: false,
+      brandFilterState: [],
     };
   },
   methods: {
+    updateBrandFilter(brands) {
+      this.brandFilterState = brands;
+      this.applyAllFilters();
+    },
     updateStockFilter(isFilterActive) {
       this.stockFilterState = isFilterActive;
       this.applyAllFilters();
@@ -94,6 +106,13 @@ export default {
       if (this.stockFilterState) {
         filteredProducts = filteredProducts.filter(
           (product) => product.isAvailable
+        );
+      }
+
+      // Apply Brand Filter
+      if (this.brandFilterState.length > 0) {
+        filteredProducts = filteredProducts.filter((product) =>
+          this.brandFilterState.includes(product.brand)
         );
       }
 
