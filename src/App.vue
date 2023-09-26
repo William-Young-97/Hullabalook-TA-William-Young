@@ -47,19 +47,27 @@
       </p>
       <hr />
     </div>
-    <div class="displayCount">
+    <div class="display-count">
       <ProductCountDisplay :productCount="displayedProducts.length" />
+    </div>
+
+    <div class="sort-drop-down">
+      <ProductSortBy
+        class="sort-by"
+        :products="displayedProducts"
+        @sortedBy="displayedProducts = $event"
+      />
     </div>
 
     <div class="filters">
       <h3>Filters</h3>
       <StockFilter
-        class="stockFilter"
+        class="stock-filter"
         :products="allProducts"
         @stockFilterApplied="updateStockFilter"
       />
       <BrandFilter
-        class="brandFilter"
+        class="brand-filter"
         :products="allProducts"
         @brandFilterApplied="updateBrandFilter"
       />
@@ -77,6 +85,7 @@ import ProductGridItem from './components/ProductGridItem.vue';
 import StockFilter from './components/StockFilter.vue';
 import BrandFilter from './components/BrandFilter.vue';
 import ProductCountDisplay from './components/DisplayCounter.vue';
+import ProductSortBy from './components/ProductsSortBy.vue';
 import products from './data/products.json';
 
 export default {
@@ -86,6 +95,7 @@ export default {
     StockFilter,
     BrandFilter,
     ProductCountDisplay,
+    ProductSortBy,
   },
   data() {
     return {
