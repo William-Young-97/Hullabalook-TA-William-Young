@@ -47,6 +47,9 @@
       </p>
       <hr />
     </div>
+    <div class="displayCount">
+      <ProductCountDisplay :productCount="displayedProducts.length" />
+    </div>
 
     <div class="filters">
       <h3>Filters</h3>
@@ -73,6 +76,7 @@
 import ProductGridItem from './components/ProductGridItem.vue';
 import StockFilter from './components/StockFilter.vue';
 import BrandFilter from './components/BrandFilter.vue';
+import ProductCountDisplay from './components/DisplayCounter.vue';
 import products from './data/products.json';
 
 export default {
@@ -81,6 +85,7 @@ export default {
     ProductGridItem,
     StockFilter,
     BrandFilter,
+    ProductCountDisplay,
   },
   data() {
     return {
