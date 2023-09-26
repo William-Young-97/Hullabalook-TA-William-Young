@@ -9,6 +9,12 @@
 <script>
 export default {
   name: 'StockFilter',
+  props: {
+    products: {
+      type: Array,
+      required: true,
+    },
+  },
   data() {
     return {
       isFilterActive: false,
@@ -17,7 +23,7 @@ export default {
   methods: {
     toggleFilter() {
       this.isFilterActive = !this.isFilterActive;
-      this.$emit('stockFilterApplied', this.isFilterActive);
+      this.$emit('stockFilterApplied', this.isFilterActive); // Emit only the state
     },
   },
 };

@@ -52,14 +52,14 @@
       <h3>Filters</h3>
       <StockFilter
         class="stockFilter"
-        :products="products"
+        :products="allProducts"
         @stockFilterApplied="updateStockFilter"
       />
       <div></div>
     </div>
 
     <div class="product-grid">
-      <ProductGridItem :products="products" />
+      <ProductGridItem :products="displayedProducts" />
     </div>
   </div>
 </template>
@@ -77,22 +77,27 @@ export default {
   },
   data() {
     return {
-      products,
-      isFilterActive: false,
+      allProducts: products,
+      displayedProducts: products,
+      stockFilterState: false,
     };
   },
-  computed: {
-    // computed property to return either all products or only available products based on isFilterActive
-    filteredProducts() {
-      if (this.isFilterActive) {
-        return this.products.filter((product) => product.isAvailable);
-      }
-      return this.products;
-    },
-  },
   methods: {
-    updateStockFilter(status) {
-      this.isFilterActive = status;
+    updateStockFilter(isFilterActive) {
+      this.stockFilterState = isFilterActive;
+      this.applyAllFilters();
+    },
+    applyAllFilters() {
+      let filteredProducts = this.allProducts;
+
+      // Apply Stock Filter
+      if (this.stockFilterState) {
+        filteredProducts = filteredProducts.filter(
+          (product) => product.isAvailable
+        );
+      }
+
+      this.displayedProducts = filteredProducts;
     },
   },
 };
