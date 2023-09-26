@@ -7,7 +7,10 @@
         :alt="`Image of ${product.name}`"
       />
       <div class="product-info">
-        <p class="product-name">{{ product.name }}</p>
+        <div class="info-background">
+          <p class="product-name">{{ product.name }}</p>
+          <p class="product-price">Price: £{{ product.price }}</p>
+        </div>
       </div>
     </div>
   </div>
@@ -27,7 +30,7 @@ export default {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
-  padding: 100px;
+  padding: 20px;
 }
 
 .card {
@@ -44,21 +47,22 @@ export default {
   align-self: center;
 }
 
-.product-info > * {
-  overflow-wrap: break-word;
+.product-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
+}
+
+.info-background {
+  background-color: whitesmoke; /* Add background color here */
+  padding: 5px;
+  width: 80%;
   text-align: center;
 }
 
-.product-name {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: -50px;
-  z-index: 1;
-  align-self: center;
-  width: 80%;
-  background-color: whitesmoke;
-  padding: 5px;
+.product-name,
+.product-price {
+  margin: 5px;
 }
 </style>
